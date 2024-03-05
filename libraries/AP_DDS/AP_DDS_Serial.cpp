@@ -4,6 +4,7 @@
 
 #include <errno.h>
 
+#if AP_DDS_ENABLED
 /*
   open connection on a serial port
  */
@@ -93,3 +94,4 @@ bool AP_DDS_Client::ddsSerialInit()
     comm = &serial.transport.comm;
     return true;
 }
+#endif // AP_DDS_ENABLED

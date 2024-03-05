@@ -1,4 +1,5 @@
 #include <AP_HAL/AP_HAL_Boards.h>
+#include "AP_DDS_Client.h"
 
 #if AP_DDS_ENABLED
 #include <uxr/client/util/ping.h>
@@ -23,7 +24,6 @@
 #endif
 #include "AP_DDS_Frames.h"
 
-#include "AP_DDS_Client.h"
 #include "AP_DDS_Topic_Table.h"
 #include "AP_DDS_Service_Table.h"
 #include "AP_DDS_External_Odom.h"

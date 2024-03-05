@@ -296,6 +296,9 @@ submodules at specific revisions.
     
     g.add_option('--enable-dds', action='store_true',
                  help="Enable the dds client to connect with ROS2/DDS.")
+    
+    g.add_option('--disable-dds', action='store_true',
+                 help="Disable the dds client to connect with ROS2/DDS.")
 
     g.add_option('--disable-networking', action='store_true',
                  help="Disable the networking API code")
@@ -563,6 +566,15 @@ def configure(cfg):
     else:
         cfg.end_msg('disabled', color='YELLOW')
 
+    cfg.start_msg('XRCE-DDS')
+    if cfg.options.disable_dds:
+        cfg.end_msg('disabled', color='YELLOW')
+    elif cfg.options.enable_dds:
+        cfg.end_msg('enabled')
+    else:
+        cfg.end_msg('maybe')
+    cfg.recurse('libraries/AP_Scripting')
+
     cfg.start_msg('Scripting')
     if cfg.options.disable_scripting:
         cfg.end_msg('disabled', color='YELLOW')
@@ -745,9 +757,7 @@ def _build_dynamic_sources(bld):
                 bld.srcnode.find_dir('modules/DroneCAN/libcanard/').abspath(),
             ]
         )
-
-    if bld.env.ENABLE_DDS:
-        bld.recurse("libraries/AP_DDS")
+    bld.recurse("libraries/AP_DDS")
 
     def write_version_header(tsk):
         bld = tsk.generator.bld

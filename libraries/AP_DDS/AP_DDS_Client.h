@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AP_DDS_config.h"
+
 #if AP_DDS_ENABLED
 
 #include "uxr/client/client.h"

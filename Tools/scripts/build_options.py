@@ -383,6 +383,8 @@ BUILD_OPTIONS = [
     Feature('Filesystem', 'FILESYSTEM_SYS', 'AP_FILESYSTEM_SYS_ENABLED', 'Enable @SYS/ filesystem', 0, None),
     Feature('Filesystem', 'APJ_TOOL_PARAMETERS', 'FORCE_APJ_DEFAULT_PARAMETERS', 'Enable apj_tool parameter area', 0, None),
 
+    Feature('DDS', 'DDS_ENABLED', 'AP_DDS_ENABLED', 'Enable DDS Support', 1, None),
+
     Feature('Networking', 'PPP Support', 'AP_NETWORKING_BACKEND_PPP', 'Enable PPP networking', 0, None),
 ]
 
