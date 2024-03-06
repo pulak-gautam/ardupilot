@@ -2002,14 +2002,14 @@ class TestSuite(ABC):
                                        0,
                                        0)
 
-    def reboot_sitl(self, required_bootcount=None, force=False):
+    def reboot_sitl(self, required_bootcount=None, force=False, check_position=True):
         """Reboot SITL instance and wait for it to reconnect."""
         if self.armed() and not force:
             raise NotAchievedException("Reboot attempted while armed")
         self.progress("Rebooting SITL")
         self.reboot_sitl_mav(required_bootcount=required_bootcount, force=force)
         self.do_heartbeats(force=True)
-        if self.frame != 'sailboat':  # sailboats drift with wind!
+        if check_position and self.frame != 'sailboat':  # sailboats drift with wind!
             self.assert_simstate_location_is_at_startup_location()
 
     def reboot_sitl_mavproxy(self, required_bootcount=None):
@@ -7953,7 +7953,7 @@ Also, ignores heartbeats not from our target system'''
         if "STATUSTEXT" not in c.collections:
             raise NotAchievedException("Asked to check context but it isn't collecting!")
         for x in c.collections["STATUSTEXT"]:
-            self.progress("  statustext want=(%s) got=(%s)" % (x.text, text))
+            self.progress("  statustext got=(%s) want=(%s)" % (x.text, text))
             if regex:
                 if re.match(text, x.text):
                     return x
